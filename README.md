@@ -6,6 +6,11 @@ A basic implementation of TVPO, a multitask regularized policy optimization algo
 
 
 
+<img src="extras/tree_env.png" alt="drawing" width="100"/>
+
+
+
+
 **Files**
 
 `envs.py`: defines the tree environment class and tree distribution class 
