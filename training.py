@@ -216,17 +216,13 @@ def train_reg(policy, val, env, args, task_id=-1, plot=False, display_iter=0):
       print (f"iter {t}: loss = {loss}, reward = {ep_reward_mean}, policy: {policy.detach().numpy().flatten()[:3]}, norm = {tr.norm(gradient)}")
       get_path(env, policy, args['decisions'], print_path=True)
 
-    if ep_reward_mean == 3.0:
-      return_hist += (max_t - t) * [3.0]
-      print ("\n")
-      return policy, pi0, return_hist
 
     if ep_reward_mean > best_r:
       best_policy = policy 
       best_r = ep_reward_mean
 
   if plot:
-    fig, ax = plt.subplots(figsize=(4,3))
+    _, ax = plt.subplots(figsize=(4,3))
 
     ax.plot(return_hist)
     ax.set_ylabel('Expected Reward')

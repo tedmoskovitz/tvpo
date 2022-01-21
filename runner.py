@@ -1,8 +1,6 @@
 import numpy as np
 import torch as tr
-from utils import get_theta, pi_dist
-from training_nn import train_ac_distill
-from utils import node2obs, softmax
+from utils import node2obs, softmax, get_theta
 import torch.nn.functional as F
 import copy
 import pdb
@@ -22,8 +20,8 @@ class Runner(object):
     def beta(self, k):
         return np.exp(-k/10.)
         
-    def run(self, M_tasks, args, task_list=None, init_params=None):
-        return_hists, return_hists_d, pi0_hist = [], [], []
+    def run(self, M_tasks, args, task_list=None):
+        return_hists, pi0_hist = [], []
         T_dist = self.T_dist
         pi0 = self.pi0
         if args['reg'] not in ['TV', 'log-barrier', 'maxent']:
@@ -43,7 +41,6 @@ class Runner(object):
                     
             # update pi0
             if args['reg'] == 'TV':
-                # update pi0
                 for s in T_m.decisions:
                     state = node2obs(T_m, s) # make the states into a single tensor 
                     pi = tr.dot(softmax(policy).flatten(), state) 

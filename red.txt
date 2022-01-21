@@ -1,7 +1,0 @@
-Attached is the experimental code for "Towards an Understanding of Default Policies 
-in Multitask Policy Optimization." 
-
-*envs.py*: defines the tree environment class and tree distribution class 
-*runner.py*: defines the outer loop of a generic multitask RPO algorithm, with different options for different regularizers
-*training.py*: training functions for updating and experience collection
-*utils.py*: utility functions

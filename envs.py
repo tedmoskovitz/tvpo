@@ -3,10 +3,10 @@ from binarytree import tree, build, Node
 import numpy as np
 import torch
 
-def create_tree_robust(depth=5, sparsity=0.5, reverse=False, max_reward=10, subtree_depth=3, fixed=False, good_idxs=[15], bad_idxs=[], doors=[17]):
+def create_tree_robust(depth=5, sparsity=0.5, reverse=False, max_reward=10, fixed=False, good_idxs=[15], bad_idxs=[], doors=[17]):
   while True: 
     try:
-      if fixed: root = create_fixed_tree(good_idxs=good_idxs, bad_idxs=[], doors=doors)
+      if fixed: root = create_fixed_tree(good_idxs=good_idxs, bad_idxs=bad_idxs, doors=doors)
       else: root = create_tree(depth, sparsity, reverse, max_reward)
       return(root)
     except:
@@ -80,8 +80,7 @@ def create_fixed_tree(good_idxs=[15], bad_idxs=[], base=0, doors=[17], recurse=T
 
 
 def create_tree(depth=5, sparsity=0.5, reverse=False, max_reward=10, start_idxs=None):
-  #seed = 0
-  #np.random.seed(seed)
+
   if start_idxs is None:
     root = Node(1)
     root.left = Node(2)
@@ -136,7 +135,6 @@ class TreeEnv(object):
   def __init__(
       self, depth=5, sparsity=0.8, reverse=True, max_reward=10, subtree_depth=1, structured=False, fixed=False, good_idxs=[15], bad_idxs=[], doors=[17], dense_r=False):
 
-    #np.random.seed(seed)
     self.depth = depth
     self.sparsity = sparsity
     self.reverse = reverse
@@ -211,10 +209,8 @@ class TreeDistribution(object):
     def sample(self):
         # sample number of rewarded nodes; use geometric dist to encourage sparsity
         n_r = min(np.random.geometric(p=0.5), len(self.reward_options))
-        #n_r = np.random.choice(np.arange(1, len(self.reward_options) + 1))
         # sample number of doors to second room (maybe forget this...)
         n_d = min(np.random.geometric(p=0.5), len(self.door_options))
-        #n_d = np.random.choice(np.arange(1, len(self.door_options) + 1))
         
         # sample rewarded nodes
         rewarded_nodes = np.random.choice(self.reward_options, size=n_r)

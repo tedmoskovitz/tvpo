@@ -3,7 +3,7 @@ from typing import Callable
 import torch as tr
 from torch.nn import init
 import pandas as pd
-import pdb
+import matplotlib.pyplot as plt
 import random
 
 def KL(p: tr.Tensor, q: tr.Tensor) -> tr.Tensor:
@@ -29,16 +29,6 @@ def policy_similarity(state: tr.Tensor, Pi: list, d: Callable, omega: float = 1.
       div += d(Pi[i](state), Pi[j](state))
   return tr.exp(-omega * div)
 
-def policy_similarity2(state: tr.Tensor, Pi: list, d: Callable, omega: Callable) -> float:
-  """compute the policy agreement function"""
-  n = len(Pi)
-  div = 0
-  temp = 0.0
-  for i in range(n):
-    for j in range(i + 1, n):
-      temp += omega(NS[i, state], NS[j, state]) # NS is an n_policies x n_states matrix of visit counts
-      div += d(Pi[i](state), Pi[j](state))
-  return tr.exp(-omega * div)
 
 def softmax(policy):
   return(tr.exp(policy) / (1 + tr.exp(policy)))
@@ -153,8 +143,7 @@ def errorfill(x, y, yerr, color='C0', alpha_fill=0.3, ax=None, label=None, lw=1,
     elif len(yerr) == 2:
         ymin, ymax = yerr
     l, = ax.plot(x, y, color=color, label=label, lw=lw, ls=ls)
-    #ax.set_ylabel(r'fitness')
-    #ax.set_xlabel(r'evaluations')
+
     ax.tick_params(axis='both', labelsize=20)
     ax.grid(alpha=0.7)
     ax.fill_between(x, ymax, ymin, color=color, alpha=alpha_fill)
