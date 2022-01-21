@@ -2,15 +2,18 @@
 
 A basic implementation of TVPO, a multitask regularized policy optimization algorithm, from our paper [Towards an Understanding of Default Policies in Multitask Policy Optimization](https://arxiv.org/abs/2111.02994). 
 
-![](extras/tree_env.pdf)
+![](extras/tree_env.png)
 
 
 
 **Files**
 
 `envs.py`: defines the tree environment class and tree distribution class 
+
 `runner.py`: defines the outer loop of a generic multitask RPO algorithm, with different options for different regularizers
+
 `training.py`: training functions for updating and experience collection
+
 `utils.py`: utility functions
 
 
