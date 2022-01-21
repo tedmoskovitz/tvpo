@@ -2,12 +2,6 @@
 
 A basic implementation of TVPO, a multitask regularized policy optimization algorithm, from our paper [Towards an Understanding of Default Policies in Multitask Policy Optimization](https://arxiv.org/abs/2111.02994). 
 
-![](extras/tree_env.png)
-
-
-
-<img src="extras/tree_env.png" alt="drawing" width="250"/>
-
 <p align="center">
   <img src="extras/tree_env.png", width = 50% />
 </p>
