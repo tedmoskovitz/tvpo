@@ -6,7 +6,11 @@ A basic implementation of TVPO, a multitask regularized policy optimization algo
 
 
 
-<img src="extras/tree_env.png" alt="drawing" width="100"/>
+<img src="extras/tree_env.png" alt="drawing" width="250"/>
+
+<p align="center">
+  <img src="extras/tree_env.png", width = 50% />
+</p>
 
 
 
